@@ -1,0 +1,8 @@
+    <div class="mb-3">
+    <label for="cat">Select Category</label>
+    <select name="cat" id="cat" class="form-control" [(ngModel)]="selectedCatID">
+      <option *ngFor="let cat of catList" [value]="cat.id">{{cat.name}}</option>
+    </select>
+  </div>
+  <p>{{selectedCatID}}</p>
+  <app-products></app-products>
