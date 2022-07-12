@@ -8,6 +8,7 @@ import { Component, OnInit } from '@angular/core';
 export class HeaderComponent implements OnInit {
 
   constructor() { }
+  credit:any=29909011509345; 
 
   ngOnInit(): void {
   }

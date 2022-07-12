@@ -20,13 +20,14 @@
     [(ngModel)]="userFeedback">
     <h1>{{userFeedback}}</h1> -->
 
-      <!-- <div class="mb-3">
+      <div class="mb-3">
     <label for="cat">Select Category</label>
     <select name="cat" id="cat" class="form-control" [(ngModel)]="selectedCatID">
+      <option [value]=0>All</option>
       <option *ngFor="let cat of catList" [value]="cat.id">{{cat.name}}</option>
     </select>
   </div>
-  <p>{{selectedCatID}}</p> -->
+  <p>{{selectedCatID}}</p>
 
 
     <!-- date pipe  -->
@@ -42,19 +43,20 @@
               <th scope="col">Image</th>
               <th scope="col">Quantity</th>
               <th scope="col">price</th>
+              <th scope="col">count</th>
               <th scope="col">buy</th>
             </tr>
           </thead>
           <tbody>
           <ng-container  *ngFor="let prd of prdlist ;let i=index trackBy: trackByItems" >
           <!-- <tr *ngIf="prd.quantity>0" [class.text-danger]="prd.quantity==0" [style.background-color]="(prd.quantity==0)?'#ff04042e':'#049b0457'" [ngClass]="{'bg-warning':prd.quantity==0}"> -->
-            <tr *ngIf="prd.quantity>=0" [class.text-danger]="prd.quantity==0"
+            <tr *ngIf="prd.quantity>=selectedCatID" [class.text-danger]="prd.quantity==0"
                  [style.background-color] ="(prd.quantity==0)?'#FFFCF7':'#E8FFFD'">
             <td>{{i+1}}</td>
             <td>{{prd.name |uppercase}}</td>
             <td ><img [src]="prd.imgURL" BorderStyle hoverColor="#0004" style="height: 100px;"></td>
             <!-- <td>{{prd.quantity}}</td> -->
-            <td>
+            <td>   
                 <!-- <span *ngIf="prd.quantity>0;else outOfStock">{{prd.quantity}}</span>
                 <ng-template #outOfStock >Out of stock</ng-template> -->
                 <ng-container [ngSwitch]="prd.quantity">
@@ -64,10 +66,38 @@
                     <ng-container *ngSwitchDefault>{{prd.quantity}}</ng-container>
                 </ng-container>
             </td>
-            <td>{{prd.price | USDtoEGP }}</td>
-            <td><button class="btn btn-success" [disabled]="prd.quantity==0" (click)='prd.quantity - 1'>Buy</button></td>
+            <td>{{prd.price }}</td>
+            <td><input type="number" class="form-control" style="width: 60px;" #itemsCount></td>
+            <td><button class="btn btn-success" [disabled]="prd.quantity==0" (click)="updateTotalPrice(prd.price,prd.name,itemsCount.value)">Buy</button></td>
           </tr>
         </ng-container>
         </tbody>
+    </table>
+
+    <table class="table mt-2 bg-light">
+      <thead>
+        <tr>
+          <th>Name</th>
+          <th>Price</th>
+          <th>Count</th>
+          <th>Total</th>
+        </tr>
+      </thead>
+      <tbody>
+        <ng-container >
+          <tr>
+            <td>{{prdName1}}</td>
+            <td>{{prdPrice1}}</td>
+            <td>{{prdCount1}}</td>
+            <td>{{prdPrice1*prdCount1}}</td>
+          </tr>
+         
+        </ng-container>
+        <tr class="bg-success" style="font-weight: 600; font-size: 22px;">
+          <td colspan="1"></td>
+          <td colspan="2" >Total</td>
+          <td >{{orderTotalPrice}}</td>
+        </tr>
+      </tbody>
     </table>
 

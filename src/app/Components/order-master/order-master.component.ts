@@ -9,6 +9,7 @@ import { ICategory } from 'src/app/models/icategory';
 export class OrderMasterComponent implements OnInit {
   catList:ICategory[];
   selectedCatID:number=0;
+  // receivedOrderTotalPrice:number=0;
   constructor() { 
 
    
@@ -22,5 +23,9 @@ export class OrderMasterComponent implements OnInit {
 
   ngOnInit(): void {
   }
+
+  // onTotalPriceChanged(totalPrice:number){
+  //   this.receivedOrderTotalPrice=totalPrice;
+  // }
 
 }

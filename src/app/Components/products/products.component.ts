@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, EventEmitter, OnChanges, OnInit, Output } from '@angular/core';
 import { ICategory } from 'src/app/models/icategory';
 import { IProduct } from 'src/app/models/iproduct';
 import { Store } from 'src/app/models/store';
@@ -8,16 +8,20 @@ import { Store } from 'src/app/models/store';
   templateUrl: './products.component.html',
   styleUrls: ['./products.component.scss']
 })
-export class ProductsComponent implements OnInit {
+export class ProductsComponent implements OnInit, OnChanges {
 
   product:IProduct={catID:12,id:40,imgURL:'https://fakeimg.pl/250x100/',name:'pepsi',price:10,quantity:1};
   prdlist:IProduct[];
-  // catList:ICategory[];
+  catList:ICategory[];
   selectedCatID:number=0;
   myDate:Date=new Date();
-
   storeData:Store;
+  orderTotalPrice:number = 0;
+  prdName1:any;
+  prdPrice1:number=0;
+  prdCount1:number=0;
 
+  // @Output() totalPriceChanged:EventEmitter<number>
 
   constructor() {
     //initialize array with anomynous objects
@@ -31,13 +35,14 @@ export class ProductsComponent implements OnInit {
 
     ];
 
+
     this.storeData=new Store("market",["liverpool","mahala elkobra","ahu hammad"],"https://fakeimg.pl/250x100/");
 
-    // this.catList=[
-    //   {id:1,name:'labTop'},
-    //   {id:2,name:'TV'},
-    //   {id:3,name:'Mobile'},
-    // ];
+    this.catList=[
+      {id:1,name:'labTop'},
+      {id:2,name:'TV'},
+      {id:3,name:'Mobile'},
+    ];
 
    }
  
@@ -49,12 +54,31 @@ export class ProductsComponent implements OnInit {
    
 trackByItems(index: number, item: IProduct): number { return item.id; }
 
+ngOnChanges():void{
+
+}
+
   ngOnInit(): void {
   }
 
 redu:number=2;
   reduce():number{
     return this.redu-1;
+  }
+
+  updateTotalPrice(prdPrice:number,prdName:any,itemCount:any){
+    // this.orderTotalPrice +=(prdPrice*itemCount);
+    // this.orderTotalPrice +=(prdPrice * parseInt( itemCount ));
+    // this.orderTotalPrice +=(prdPrice * Number( itemCount ));
+    // this.orderTotalPrice +=(prdPrice * itemCount as number);
+    // this.orderTotalPrice +=(prdPrice * +itemCount );
+    this.orderTotalPrice +=prdPrice ;
+    this.prdName1=prdName;
+    this.prdPrice1=prdPrice;
+    this.prdCount1=itemCount;
+    
+    
+
   }
 
 }

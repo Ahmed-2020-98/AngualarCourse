@@ -12,6 +12,8 @@ import { BorderBoxDirective } from './Directives/border-box.directive';
 import { UsdPipe } from './pipe/usd.pipe';
 import { ReduceQDirective } from './Directives/reduce-q.directive';
 import { OrderMasterComponent } from './Components/order-master/order-master.component';
+import { FormatCreaditCardPipe } from './pipe/format-creadit-card.pipe';
+import { IdCardPipe } from './pipe/id-card.pipe';
 
 @NgModule({
   declarations: [
@@ -23,7 +25,9 @@ import { OrderMasterComponent } from './Components/order-master/order-master.com
     BorderBoxDirective,
     UsdPipe,
     ReduceQDirective,
-    OrderMasterComponent
+    OrderMasterComponent,
+    FormatCreaditCardPipe,
+    IdCardPipe
   ],
   imports: [
     BrowserModule,

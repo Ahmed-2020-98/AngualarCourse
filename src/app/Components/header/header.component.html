@@ -28,4 +28,8 @@
 
     </div>
 
+    <input type="text" class="form-control" name="userFeedback" id="userFeedback" [(ngModel)]="credit">
+    <h4>Birthday is : {{credit | idCard}}</h4> 
+    <h4>Credit Card is: {{credit | formatCreaditCard}}</h4> 
+
   </header>
